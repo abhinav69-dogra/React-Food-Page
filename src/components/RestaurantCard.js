@@ -9,9 +9,9 @@ const RestrauntCard = ({
   return (
     <div className="card1">
       <img src={IMG_CDN_URL + cloudinaryImageId} />
-      <h2>{name}</h2>
-      <h3>{cuisines.join(", ")}</h3>
-      <h4>{lastMileTravelString} minutes</h4>
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h5>{lastMileTravelString} minutes</h5>
     </div>
   );
 };

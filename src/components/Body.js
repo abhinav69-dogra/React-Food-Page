@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { restaurantList } from "../contants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchText, restaurants) {
   const filterData = restaurants.filter((restaurant) =>
@@ -26,16 +26,10 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     setAllRes(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
   }
-
-  console.log("render");
-
-  // Conditional Rendering
-  // if 'restaurants' is empty '[]' ==> Shimmer UI
-  // if 'restaurants' has data      ==> actual Data UI
 
   return allRes.length === 0 ? (
     <Shimmer />
@@ -54,9 +48,7 @@ const Body = () => {
         <button
           className="search-btn"
           onClick={() => {
-            //need to filter the data
             const data = filterData(searchText, allRes);
-            // update the state - restaurants
             setFilteredRes(data);
           }}
         >
@@ -66,7 +58,12 @@ const Body = () => {
       <div className="restaurant-list">
         {filteredRes.map((restaurant) => {
           return (
-            <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+            <Link
+              to={"/restaurant/" + restaurant.data.id}
+              key={restaurant.data.id}
+            >
+              <RestaurantCard {...restaurant.data} />
+            </Link>
           );
         })}
       </div>

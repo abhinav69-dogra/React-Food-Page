@@ -84,14 +84,14 @@ body {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     border-radius: 6px;
-    height: 400px;
+    height: 300px;
     overflow: hidden;
     width: 100px;
     margin: 40px auto;
 }
 
 .card .shimmerBG {
-    animation-duration: 2.2s;
+    animation-duration: 1.0s;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
     animation-name: shimmer;
@@ -150,3 +150,10 @@ body {
 .m-t-24 {
     margin-top: 24px;
 }
+
+/*****************************/
+
+.menu-container {
+    display: flex;
+}
+
