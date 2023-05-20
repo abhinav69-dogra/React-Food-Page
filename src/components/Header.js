@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { APP_LOGO } from "../contants";
+import useOnline from "../utils/useOnline";
 
 const Title = () => (
   <a href="/">
-    <img
-      className="logo"
-      alt="logo"
-      src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
-    />
+    <img className="logo" alt="logo" src={APP_LOGO} />
   </a>
 );
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isOnline = useOnline();
   return (
     <div className="header">
       <Title />
@@ -31,7 +30,12 @@ const Header = () => {
             <Link to={"/contact"}>Contact</Link>
           </li>
 
+          <li>
+            <Link to={"/instamart"}>Instamart</Link>
+          </li>
+
           <li>Cart</li>
+          <li>{isOnline ? "🟢" : "🔴"}</li>
           {isLoggedIn ? (
             <button
               onClick={() => {
