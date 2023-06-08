@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { RESTAURANT_LIST_URL } from "../contants";
 import { filterData } from "../utils/Helper";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
+  const { user, setUser } = useContext(UserContext);
   const [allRes, setAllRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -53,6 +55,13 @@ const Body = () => {
         >
           Search
         </button>
+        <span style={{ padding: "1%" }}></span>
+        <input
+          value={user.name}
+          onChange={(e) => {
+            setUser({ name: e.target.value, email: "new@gmail.com" });
+          }}
+        />
       </div>
       <div className="restaurant-list">
         {filteredRes.map((restaurant) => {
