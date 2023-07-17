@@ -5,7 +5,7 @@ export const RESTAURANT_LIST_URL =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.902402&lng=77.517359&page_type=DESKTOP_WEB_LISTING";
 
 export const APP_LOGO =
-  "https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj";
+  "https://thumbs.dreamstime.com/b/fast-food-phone-order-line-neon-icon-element-illustration-signs-symbols-can-be-used-web-logo-mobile-app-ui-ux-black-156783524.jpg";
 
 export const MENU_LIST_URL =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.902752&lng=77.52174&restaurantId=";
