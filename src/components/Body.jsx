@@ -2,11 +2,12 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react"; /* This is named export */
 import Shimmer from "./Shimmer"; /* This is default export */
 import { swiggy_api_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // Filter the restaurant data according input type
 function filterData(searchText, restaurants) {
   const filterData = restaurants.filter((restaurant) =>
-    restaurant?.data?.name.toLowerCase().includes(searchText.toLowerCase())
+    restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
   );
   return filterData;
 }
@@ -17,7 +18,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   // use useEffect for one time call getRestaurants using empty dependency array
   useEffect(() => {
@@ -31,8 +32,8 @@ const Body = () => {
       const data = await fetch(swiggy_api_URL);
       const json = await data.json();
       // updated state variable restaurants with Swiggy API data
-      setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-      setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      setAllRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +56,15 @@ const Body = () => {
 
   // if allRestaurants is empty don't render restaurants cards
   if (!allRestaurants) return null;
+  
+  const onlineStatus=useOnlineStatus();
+  if(onlineStatus===false){
+    return (
+     <h1>
+       Looks like you're offline!
+     </h1>
+    );
+ };
 
   return (
     <>
@@ -77,17 +87,20 @@ const Body = () => {
           Search
         </button>
       </div>
+      <div className="filter-btn">
+        <button>Top Rated Restros</button>
+      </div>
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
       {/* if restaurants data is not fetched then display Shimmer UI after the fetched data display restaurants cards */}
-      {allRestaurants?.length === 0 ? (
+      {allRestaurants?.length === 0 ?  (
         <Shimmer />
       ) : (
         <div className="restaurant-list">
           {/* We are mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
           {filteredRestaurants.map((restaurant) => {
             return (
-              <RestaurantCard key={restaurant.data.id} {...restaurant.data} />
+              <RestaurantCard key={restaurant?.info.id} {...restaurant?.info} />
             );
           })}
         </div>

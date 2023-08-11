@@ -26,7 +26,7 @@
   height: 80px;
   background-color: var(--header-bg-color);
   border-radius: 5px;
-  box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
+  box-shadow: -1px 4px 20px 6px rgba(0, 0, 0, 0.2);
   color: var(--text-color);
   font-weight: bold;
   position: fixed;
@@ -300,4 +300,8 @@
   .search-container {
     margin: 70px auto 0px;
   }
+}
+.user-card{
+  padding: 10px;
+  border : 1px solid black;
 }
